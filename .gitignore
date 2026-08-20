@@ -1,0 +1,62 @@
+# --- secrets and credentials -------------------------------------------------
+.env
+*.env
+.env.*
+credentials*
+secrets*
+*token*
+*.pem
+*.key
+id_rsa*
+
+# --- browser automation artefacts --------------------------------------------
+# Browser automation was used during implementation but is deliberately kept
+# out of this repository: it is throwaway tooling, not assessment work.
+.clickup_profile/
+browser-profile/
+.playwright/
+playwright-report/
+test-results/
+cookies*
+storage_state*
+session*
+*.har
+
+# --- automation scripts (kept outside the repo) ------------------------------
+scratchpad/
+**/scratchpad/
+cu_api.py
+cu_auth.py
+cu_check.py
+cu_probe.py
+build_*.py
+ui_*.py
+auto_*.py
+view_*.py
+fix_*.py
+final_0*.py
+verify_ui.py
+audit_fields.py
+qa_final.py
+check_tz.py
+test_guest_link.py
+find_sharing.py
+open_share_dialog.py
+rebuild_design_list.py
+
+# --- python ------------------------------------------------------------------
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.pytest_cache/
+
+# --- os / editor -------------------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.log
+*.tmp

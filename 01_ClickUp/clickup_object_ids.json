@@ -1,0 +1,46 @@
+{
+  "workspace_team_id": "90161754416",
+  "client_projects_space_id": "90167863724",
+  "vendors_space_id": "90167863726",
+  "projects_list_id": "901616536928",
+  "design_tasks_list_id": "901616541621",
+  "vendor_payments_list_id": "901616536934",
+  "project_field_ids": {
+    "Client": "06239a00-1837-4a82-a414-8b8957ba0ffa",
+    "Project Type": "79c7aae4-1030-4049-8f98-b7f1dcf6391e",
+    "Project Budget": "5f274664-366c-4ff0-b7c6-88e97752a428",
+    "Project Health": "9ed26860-f13c-444a-9efb-36ad8671e5f2",
+    "Project Manager": "19981730-c3a2-4a14-9d74-1409fbe54442",
+    "Start Date": "944b092d-45eb-497c-97d3-7c8771f76297",
+    "Expected Handover": "09802b83-72fa-418f-96ab-abfeb2df6311",
+    "Client Payment Status": "202c3c06-c312-4483-a9a0-6a718677f9b8",
+    "Location": "49517b0b-3456-4cc2-b087-18f16c53fc97"
+  },
+  "design_field_ids": {
+    "Project": "15c7a8f6-a1a6-4e23-9be0-1f1ccf616e51",
+    "Work Type": "3677440b-5fb9-4ce1-a9a9-5dd33f48c383"
+  },
+  "vendor_field_ids": {
+    "Vendor Name": "abfc9dcd-efb9-411c-8bbd-65b380cf39d2",
+    "Invoice / PO Number": "82df1486-c1c0-41f5-872d-c21cae0dc73b",
+    "Related Project": "7f7886f2-5ab7-4e24-83eb-a0eb0959ca59",
+    "Amount (INR)": "3d86a673-7a14-4d5b-b706-06a7acc2da69",
+    "Payment Due Date": "b939a259-c17c-48cc-bfc3-5919f4382909",
+    "Paid On": "ee9a99b5-5804-4813-be6e-9a377cf52012",
+    "Payment Reference / UTR": "87cba941-4278-41af-be75-c9ee31c9a147"
+  },
+  "project_task_ids": {
+    "Nair Residence - 3BHK": "86d430nxv",
+    "Sharma Villa": "86d430nyf",
+    "Kapoor Kitchen Renovation": "86d430nzn",
+    "Rao Office Fitout": "86d430p04",
+    "Iyer Apartment - 2BHK": "86d430p0m",
+    "Menon Duplex - Handover": "86d430p11"
+  },
+  "view_ids": {
+    "Owner Cockpit": "2kz0yc9g-716",
+    "By Designer": "2kz0yc9g-736",
+    "Overdue": "2kz0yc9g-756",
+    "Payments Due": "2kz0yc9g-776"
+  }
+}

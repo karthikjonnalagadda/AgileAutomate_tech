@@ -1,0 +1,83 @@
+SUNRISE INTERIORS - LEAD INTAKE AUTOMATION (n8n)
+Status: DESIGNED (conceptual - no n8n account required)
+
+        +---------------------------+
+        |   Google Form submission  |
+        |   (client inquiry)        |
+        +-------------+-------------+
+                      |
+                      v
+        +---------------------------+
+        | [1] TRIGGER               |
+        | New row in linked         |
+        | Google Sheet (poll 1-5m)  |
+        +-------------+-------------+
+                      |
+                      v
+        +---------------------------+
+        | [2] Validate & clean      |
+        | - required fields present |
+        | - Budget -> integer       |
+        | - Phone -> +91XXXXXXXXXX  |
+        +-------------+-------------+
+                      |
+                      v
+        +---------------------------+          FAIL
+        | [3] CREATE ClickUp card   +-------------------+
+        | List: Projects            |                   |
+        | Status: Lead              |                   v
+        | Fields: Client, Budget,   |      +------------------------+
+        |         Type, Location    |      | Retry x3 (1s/5s/25s)   |
+        +-------------+-------------+      +-----------+------------+
+                      | OK                             | still failing
+                      v                                v
+        +---------------------------+      +------------------------+
+        | [4] Write task ID back    |      | ERROR BRANCH           |
+        |     to the sheet row      |      | - log to Failed Leads  |
+        | (idempotency marker)      |      | - alert owner          |
+        +-------------+-------------+      | - manual fallback      |
+                      |                    +------------------------+
+                      v
+        +---------------------------+
+        | [5] Send client           |
+        |     confirmation          |
+        |     (email / WhatsApp)    |
+        +-------------+-------------+
+                      |
+                      v
+        +---------------------------+
+        | [6] CONDITION             |
+        | Budget > 500000 ?         |
+        +------+-------------+------+
+               |             |
+            YES|             |NO
+               v             v
+   +-------------------+  +------------------+
+   | [7] Notify design |  | END              |
+   |     team          |  | Lead recorded,   |
+   | WhatsApp / email  |  | no internal ping |
+   | to Meera + owner  |  |                  |
+   | incl. card link   |  |                  |
+   +---------+---------+  +------------------+
+             |
+             v
+          +------+
+          | END  |
+          +------+
+
+
+KEY DECISIONS
+-------------
+* Condition sits AFTER ClickUp creation and AFTER client confirmation.
+  Every lead is recorded and every client is answered regardless of budget.
+  Only the internal interruption is conditional.
+
+* Budget > 500000  (strictly greater than)
+  The brief says "above 5 lakh". Exactly 5,00,000 does NOT notify.
+  Flagged as a point to confirm with the owner.
+
+* ClickUp creation runs BEFORE the client email, so a ClickUp failure
+  leaves the client uncontacted and the run safely retryable.
+
+* Task ID written back to the sheet makes the workflow idempotent -
+  a retry or re-run cannot create the same lead twice.
