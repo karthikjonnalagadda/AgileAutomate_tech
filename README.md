@@ -281,13 +281,3 @@ The Google Doc has been created from this source and is linked below. **The rend
 | ClickUp workspace | https://app.clickup.com/90161754416/ |
 | ClickUp guest access | Both reviewers invited directly as **guests** — `amit12@agileautomate.co` and `aryansh@agileautomate.co` (guest role verified on the live workspace). There is no anonymous public link; reviewers authenticate with their own ClickUp accounts. |
 | Google Doc (submission) | https://docs.google.com/document/d/13X4d1J55h8V-RsZwattpTGsrY-sqWSsTjsGBIqQFYeQ/edit?usp=sharing |
-
-### Outstanding manual steps
-
-1. ~~Create the Google Doc~~ — **done**, linked above
-2. Capture `06_automation_config.png` (ClickUp → Design Tasks → **Automate → Manage**) and add it to the doc
-3. Confirm the doc is set to **comment or edit access** for anyone with the link, and that it opens in an incognito window
-4. Send the submission email using `06_Final/email_draft.md` — **not sent**
-5. **After submitting:** revoke the ClickUp API token used during the build
-
-*Optional tidy-up: remove the `__probe_delete_me` field from the Projects list and the leftover `to do` / `complete` statuses on Projects and Vendor Payments.*
