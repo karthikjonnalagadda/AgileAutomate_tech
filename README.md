@@ -1,48 +1,22 @@
 # Agile Automate — Technical Implementation Specialist Assessment
 
-## Candidate
-
-**Karthik Jonnalagadda**
-
-Scenario: **Sunrise Interiors**, a 6-person interior design studio in Bengaluru currently running client projects, vendor payments and task handoffs through WhatsApp groups and Excel.
+**Candidate:** Karthik Jonnalagadda
 
 ---
 
-## Assessment Components
+## 1. Assessment Overview
+
+**Scenario:** *Sunrise Interiors*, a 6-person interior design studio in Bengaluru currently running client projects, vendor payments and task handoffs through WhatsApp groups and Excel.
 
 | # | Task | State |
 |---|------|-------|
-| 1 | **ClickUp Implementation** | Built and verified against live data |
+| 1 | **ClickUp Implementation** | Built on a live workspace and verified against live data |
 | 2 | **Python Data Cleaning** | Implemented and tested |
-| 3 | **n8n Automation Design** | Theoretical, as the assignment specifies |
+| 3 | **n8n Automation Design** | **THEORETICAL — NOT EXECUTED**, as the assignment specifies |
 
 ---
 
-## Repository Structure
-
-```
-AgileAutomate_Assignment/
-├── 01_ClickUp/           architecture, sample data, build guide, QA, object IDs
-├── 02_Python/            input.csv, clean_leads.py, cleaned_leads.csv, tests
-├── 03_n8n/               workflow logic and text flow diagram
-├── 04_Submission_Doc/    source of the final submission document
-├── 05_Screenshots/       captured evidence from the live workspace
-├── 06_Final/             packaged submission: doc, checklist, email draft, evidence
-└── README.md
-```
-
-| Directory | Contents |
-|-----------|----------|
-| `01_ClickUp/` | `clickup_architecture.md` (design and reasoning), `clickup_sample_data.md` (every record), `clickup_implementation_guide.md` (step-by-step build), `clickup_final_qa.md` (audit checklist), `clickup_object_ids.json` (live workspace/space/list/field/task/view IDs for verification) |
-| `02_Python/` | Task 2 implementation, input, verified output, README and 17 documented test cases |
-| `03_n8n/` | Task 3 write-up and ASCII flow diagram |
-| `04_Submission_Doc/` | `final_document_content.md` — the text to paste into the submission Google Doc |
-| `05_Screenshots/` | Screenshots taken from the live ClickUp workspace |
-| `06_Final/` | Packaged copy of the document, submission checklist, email draft, evidence |
-
----
-
-## ClickUp
+## 2. ClickUp Implementation
 
 **Workspace:** `Sunrise Interiors` (ID `90161754416`, Free plan)
 
@@ -57,7 +31,7 @@ Sunrise Interiors
 
 Two Spaces, three Lists, **no Folders**. Statuses are inherited from the Space in ClickUp, so a project lifecycle and a payment lifecycle — two different state machines — were separated rather than forced into one status set. A project is modelled as a **task**, not a List, because Lists cannot hold custom fields, carry a status, or be counted by a view; that single decision is what makes the owner's 10-second health check possible.
 
-### Statuses
+### 2.1 Statuses
 
 | List | Statuses |
 |------|----------|
@@ -65,65 +39,33 @@ Two Spaces, three Lists, **no Folders**. Statuses are inherited from the Space i
 | Design Tasks | To Do → In Progress → Blocked → Ready for Review → Complete |
 | Vendor Payments | PO Raised → Invoice Received → Approved for Payment → Paid, plus On Hold / Disputed |
 
-All 18 required statuses are present. **Two ClickUp default statuses (`to do`, `complete`) remain on the Projects and Vendor Payments lists** and were not removed — noted here rather than hidden.
+All **18 required statuses** are present. Two ClickUp default statuses (`to do`, `complete`) remain on the Projects and Vendor Payments lists and were not removed — noted here rather than hidden.
 
----
-
-## Key Results
-
-| Metric | Verified value |
-|--------|----------------|
-| Records | **24** (6 Projects, 11 Design Tasks, 7 Vendor Payments) |
-| Required statuses | **18 / 18** |
-| Designers assigned | **3** — Meera Iyer 5, Arjun Rao 3, Divya Nair 3 |
-| Automation | **Review Handoff — created, tested, verified** |
-| Views | **4** — Owner Cockpit, By Designer, Overdue, Payments Due |
-| Project Health | On Track 4 · At Risk 1 · Delayed 1 |
-| Overdue design tasks | 3 |
-| Outstanding invoices | 6 (2 overdue) |
-| Total outstanding | **₹8,57,100** — *manually verified, not a calculated widget* |
-
-### Assignee distribution
-
-The distribution reads **5 / 3 / 3** rather than the originally planned 4 / 4 / 3. The Review Handoff automation reassigned *"Lighting design – common areas"* from Arjun Rao to Meera Iyer during testing. That is the system working as designed, and it makes the point that workload distribution is live data rather than a static plan.
-
-### Automation — "Review Handoff"
+### 2.2 Automation — "Review Handoff"
 
 | | |
 |---|---|
 | Scope | Design Tasks list |
 | Trigger | Status changes to **Ready for Review** |
-| Action 1 | Reassign to **Meera Iyer** |
+| Action 1 | Assign to **Meera Iyer** |
 | Action 2 | Add comment: *"Ready for review — please check and approve or send back with changes."* |
 
-**Test result (verified):** the task moved from `In Progress` / Arjun Rao to `Ready for Review` / Meera Iyer, and the comment was posted by **ClickBot (Automations)** — proving it was generated by the rule rather than typed by a person. Before and after evidence: `05_Screenshots/07_automation_before.png` and `08_automation_after.png`.
+**Verified test:** *"Lighting design – common areas"* moved from `In Progress` / **Arjun Rao** to `Ready for Review` / **Meera Iyer**, and the comment was posted by **ClickBot (Automations)** — proving it was generated by the rule rather than typed by a person.
 
-### Views
+Evidence: `05_Screenshots/07_automation_before.png` and `08_automation_after.png`.
+
+### 2.3 Views
 
 | View | Type | Configuration |
 |------|------|---------------|
 | **Owner Cockpit** | Board on Projects | Grouped by **Project Health** — three colour-coded columns |
 | **By Designer** | Board on Design Tasks | Grouped by assignee |
 | **Overdue** | List on Design Tasks | Overdue, incomplete design work |
-| **Payments Due** | Table on Vendor Payments | Sorted by due date, overdue first |
+| **Payments Due** | Table on Vendor Payments | Outstanding invoices sorted by due date, overdue first |
 
----
+All four are **saved workspace views**, not personal views, so guests can see them.
 
-## Important Constraint — ClickUp Free-plan custom-field quota
-
-ClickUp's Free plan caps **custom-field usage at roughly 60 writes for the lifetime of the workspace**, and clearing values does **not** refund the quota. This was verified directly: usage dropped from 62 to 29 and the next write still failed with `FIELD_033`.
-
-Rather than request a paid plan, the fields that actually drive a decision were kept and everything else moved onto **native fields, which cost nothing**:
-
-| Kept as custom fields (Projects) | Moved to native functionality |
-|---|---|
-| Client, Project Budget, Project Health, Project Manager, Expected Handover | Vendor due dates → native **Due Date** · Payment state → native **Status** · Invoice / vendor / amount → **task title** · Paid On + UTR → **task description** |
-
-Every business function survives, including the duplicate-payment control. The one measurable cost: with no numeric Amount field, ClickUp cannot auto-sum outstanding payments, so **₹8,57,100 is a manually verified figure and is labelled as such** — it is not presented as a calculated dashboard widget.
-
-The general principle this enforced is one worth applying regardless of plan: **anything the platform provides natively should not be a custom field.**
-
-### Vendor tracking and the duplicate-payment control
+### 2.4 Vendor tracking and the duplicate-payment control
 
 The unit of record is **one task per invoice**, not one per vendor — a vendor has many invoices, so a vendor-level record has no single answer to "is it paid?", and that ambiguity is exactly how a payment gets made twice.
 
@@ -133,7 +75,7 @@ The sample data demonstrates the control: **Sri Balaji Plywood appears twice** �
 
 ---
 
-## Python
+## 3. Python Data Cleaning
 
 `02_Python/clean_leads.py` standardises every phone number to `+91XXXXXXXXXX` and removes exact duplicate rows.
 
@@ -153,7 +95,7 @@ Normalisation is three steps: extract digits with one regex; strip the country/t
 all numbers match +91XXXXXXXXXX
 ```
 
-17 edge cases are documented in `02_Python/test_cases.md`, all passing.
+**17 edge cases** are documented in `02_Python/test_cases.md`, all passing.
 
 **To run:**
 ```
@@ -164,9 +106,9 @@ Requires `pandas`. Must be run from that directory — the script reads `input.c
 
 ---
 
-## n8n
+## 4. n8n Automation Design
 
-**Theoretical, as the assignment explicitly specifies ("No n8n account needed — this is theoretical"). No workflow was built and no execution is claimed.**
+> **THEORETICAL — NOT EXECUTED.** The assignment explicitly states *"No n8n account needed — this is theoretical."* No workflow was built and no execution is claimed anywhere in this repository.
 
 ```
 Google Form → Validate Lead → Create ClickUp Lead → Send Client Confirmation
@@ -176,63 +118,175 @@ Google Form → Validate Lead → Create ClickUp Lead → Send Client Confirmati
                           └── NO  → End
 ```
 
-The write-up in `03_n8n/automation_logic.md` covers the trigger, validation, ClickUp lead creation, client confirmation, the budget condition and its placement, high-value notification, retry handling with exponential backoff, the error branch, and idempotency via a task ID written back to the source sheet.
+The write-up in `03_n8n/automation_logic.md` covers the trigger, validation, ClickUp lead creation, client confirmation, the budget condition and its placement, high-value notification, retry handling with exponential backoff, the failure branch, and idempotency via a task ID written back to the source sheet.
 
-The condition is **`Budget > ₹5,00,000`** — strictly greater than, because the brief says *above* ₹5 lakh. A budget of exactly ₹5,00,000 therefore does not notify; this is implemented as specified and flagged as a point to confirm with the owner rather than assumed.
+The condition is **`Budget > ₹5,00,000`** — strictly greater than, because the brief says *above* ₹5 lakh. A budget of exactly ₹5,00,000 therefore does not notify; this is implemented as specified and flagged as a point to confirm with the owner rather than silently assumed.
 
-The condition sits **after** ClickUp creation and **after** the client confirmation, so every lead is recorded and every client receives a reply regardless of size. Only the internal interruption is conditional.
+The condition sits **after** ClickUp creation and **after** the client confirmation, so every lead is recorded and every client receives a reply regardless of deal size. Only the internal interruption is conditional.
 
 ---
 
-## Evidence
+## 5. Evidence
 
-Screenshots captured from the live workspace:
+Screenshots captured from the live workspace, stored in two places:
 
 - `05_Screenshots/` — working directory
 - `06_Final/evidence/` — packaged copy for submission
 
-**10 of 11 planned screenshots are present.** `06_automation_config.png` (the automation builder screen) has **not** been captured. The before/after pair already demonstrates that the automation fires, but the configuration screen is still missing and is listed as an outstanding item in `06_Final/submission_checklist.md`.
+| Screenshot | Present |
+|---|---|
+| `01_workspace.png` | ✅ |
+| `02_projects.png` | ✅ |
+| `03_project_lifecycle.png` | ✅ |
+| `04_design_tasks.png` | ✅ |
+| `05_vendor_payments.png` | ✅ |
+| `06_automation_config.png` | ❌ **NOT CAPTURED** |
+| `07_automation_before.png` | ✅ |
+| `08_automation_after.png` | ✅ |
+| `09_owner_cockpit.png` | ✅ |
+| `10_payments_due.png` | ✅ |
+| `11_overdue.png` | ✅ |
+
+**10 of 11 planned screenshots are present.** `06_automation_config.png` (the automation builder screen) has **not** been captured and has not been fabricated. The before/after pair already demonstrates that the automation fires; the configuration screen remains an outstanding manual item, tracked in `06_Final/submission_checklist.md`.
 
 ---
 
-## Submission Document
+## 6. QA Results
 
-The submission text lives at:
+All figures below were read from the live workspace.
 
-```
-04_Submission_Doc/final_document_content.md
-```
+| Metric | Verified value |
+|--------|----------------|
+| Spaces | **2** |
+| Lists | **3** |
+| Records | **24** (6 Projects, 11 Design Tasks, 7 Vendor Payments) |
+| Required statuses | **18 / 18** |
+| Design tasks | **11** |
+| Designers | **3** |
+| Views | **4** — Owner Cockpit, By Designer, Overdue, Payments Due |
+| Automation | **Review Handoff — created and tested** |
 
-with a packaged copy at `06_Final/final_document_content.md`.
+**Assignee distribution**
 
-**The final Google Doc is intentionally not stored in this repository.** It is created manually by pasting the markdown into Google Docs, inserting the screenshots at their marked positions, and setting comment access. Keeping the document source in Git and the rendered doc outside it avoids maintaining two copies that can drift apart.
+| Designer | Tasks |
+|---|---|
+| Meera Iyer | 5 |
+| Arjun Rao | 3 |
+| Divya Nair | 3 |
+
+This reads **5 / 3 / 3** rather than the originally planned 4 / 4 / 3 because the Review Handoff automation reassigned *"Lighting design – common areas"* from Arjun Rao to Meera Iyer during testing. That is the system working as designed, and it makes the point that workload distribution is live data rather than a static plan.
+
+**Project health**
+
+| State | Count |
+|---|---|
+| On Track | 4 |
+| At Risk | 1 |
+| Delayed | 1 |
+
+**Other verified counts**
+
+| Metric | Value |
+|---|---|
+| Overdue design tasks | 3 |
+| Outstanding invoices | 6 |
+| Overdue invoices | 2 |
+| Total outstanding | **₹8,57,100** — *manually verified, **not** automatically calculated by ClickUp* |
 
 ---
 
-## Note on tooling
+## 7. Key Implementation Decisions
+
+### 7.1 The ClickUp Free-plan custom-field quota
+
+ClickUp's Free plan caps **custom-field usage at roughly 60 writes for the lifetime of the workspace**, and clearing values does **not** refund the quota. This was verified directly: usage dropped from 62 to 29 and the next write still failed with `FIELD_033`.
+
+Rather than request a paid plan, the fields that actually drive a decision were kept and everything else moved onto **native fields, which cost nothing**:
+
+| Kept as custom fields (Projects) | Moved to native functionality |
+|---|---|
+| Client, Project Budget, Project Health, Project Manager, Expected Handover | Vendor due dates → native **Due Date** · Payment state → native **Status** · Invoice / vendor / amount → **task title** · Paid On + UTR → **task description** |
+
+**Design Tasks rely entirely on native ClickUp fields** — status, assignee, due date and priority — which is why the busiest list in the workspace consumed none of the quota.
+
+Every business function survives, including the duplicate-payment control. The one measurable cost: with no numeric Amount field, ClickUp cannot auto-sum outstanding payments, so **₹8,57,100 is a manually verified figure and is labelled as such** throughout this repository — it is never presented as a calculated dashboard widget.
+
+The general principle this enforced is worth applying regardless of plan: **anything the platform provides natively should not be a custom field.**
+
+### 7.2 Project as a task, not a List
+
+Lists cannot hold custom fields, carry a status, or be counted by a view. Modelling a project as a task is what makes the Owner Cockpit — a board grouped by Project Health — possible at all.
+
+### 7.3 View instead of Dashboard
+
+The assignment permits "1 Dashboard **or** View". A saved View was chosen deliberately: the free plan restricts dashboard widgets, and a board grouped by Health is both faster to read and visible to guests.
+
+### 7.4 Normalise before deduplicating
+
+Covered in section 3 — the raw data has no exact duplicates until phone numbers are standardised, so the order of operations is the whole task, not an implementation detail.
+
+---
+
+## 8. Repository Structure
+
+```
+AgileAutomate_Assignment/
+├── 01_ClickUp/           architecture, sample data, build guide, QA, object IDs
+├── 02_Python/            input.csv, clean_leads.py, cleaned_leads.csv, tests
+├── 03_n8n/               workflow logic and text flow diagram
+├── 04_Submission_Doc/    source of the final submission document
+├── 05_Screenshots/       captured evidence from the live workspace
+├── 06_Final/             packaged submission: doc, checklist, email draft, evidence
+├── .gitignore
+└── README.md
+```
+
+| Directory | Contents |
+|-----------|----------|
+| `01_ClickUp/` | `clickup_architecture.md` (design and reasoning), `clickup_sample_data.md` (every record), `clickup_implementation_guide.md` (step-by-step build), `clickup_final_qa.md` (audit checklist), `clickup_object_ids.json` (live workspace / space / list / field / task / view IDs for verification) |
+| `02_Python/` | `input.csv`, `clean_leads.py`, `cleaned_leads.csv`, `README.md`, `test_cases.md` |
+| `03_n8n/` | `automation_logic.md` and `workflow_diagram.txt` |
+| `04_Submission_Doc/` | `final_document_content.md` — the text to paste into the submission Google Doc |
+| `05_Screenshots/` | Screenshots taken from the live ClickUp workspace |
+| `06_Final/` | Packaged copy of the document, submission checklist, email draft, `evidence/` |
+
+### Note on tooling
 
 Browser automation (Playwright) and the ClickUp REST API were both used during implementation — the API for structure, fields and the 24 records, browser automation for the parts of the ClickUp UI that the API does not expose, such as custom statuses and view grouping.
 
-**Those scripts are deliberately excluded from this repository.** They are throwaway build tooling, not assessment deliverables, and some of them handled authentication state. The `.gitignore` excludes them along with browser profiles, session data and any credential files.
+**Those scripts are deliberately excluded from this repository.** They are throwaway build tooling, not assessment deliverables, and some of them handled authentication state. The `.gitignore` excludes them along with browser profiles, session data and any credential files. No API token, cookie, browser profile or session artefact is present in this repository.
 
 ---
 
-## Relevant Links
+## 9. Submission Information
+
+**Document name:** `KarthikJonnalagadda_AgileAutomate_tech`
+
+| | |
+|---|---|
+| Format | Google Doc with comment/edit access |
+| To | amit12@agileautomate.co |
+| CC | aryansh@agileautomate.co |
+| Subject | Technical Implementation Specialist Assignment - Karthik Jonnalagadda |
+
+The submission text lives at `04_Submission_Doc/final_document_content.md`, with an identical packaged copy at `06_Final/final_document_content.md`.
+
+**The Google Doc is intentionally not stored in this repository.** Keeping the document source in Git and the rendered doc outside it avoids maintaining two copies that can drift apart.
+
+### Links
 
 | Item | Link |
 |------|------|
+| GitHub repository | https://github.com/karthikjonnalagadda/AgileAutomate_tech |
 | ClickUp workspace | https://app.clickup.com/90161754416/ |
-| ClickUp reviewer access | Both reviewers invited as **guests** — `amit12@agileautomate.co` and `aryansh@agileautomate.co` (verified role = guest on the live workspace) |
-| Git repository URL | **NOT PROVIDED** — no remote configured |
-| Google Doc URL | **NOT CREATED** — to be created manually |
+| ClickUp guest access | Both reviewers invited directly as **guests** — `amit12@agileautomate.co` and `aryansh@agileautomate.co` (guest role verified on the live workspace). There is no anonymous public link; reviewers authenticate with their own ClickUp accounts. |
+| Google Doc | **NOT CREATED — manual creation required** |
 
----
+### Outstanding manual steps
 
-## Outstanding Manual Steps
-
-1. Capture `06_automation_config.png` (ClickUp → Design Tasks → Automate → Manage)
-2. Create the Google Doc from `04_Submission_Doc/final_document_content.md`, insert screenshots, set comment access, name it `KarthikJonnalagadda_AgileAutomate_tech`
-3. Send the submission email using `06_Final/email_draft.md`
+1. Capture `06_automation_config.png` (ClickUp → Design Tasks → **Automate → Manage**)
+2. Create the Google Doc from `04_Submission_Doc/final_document_content.md`, insert screenshots at their marked positions, set comment access, and name it `KarthikJonnalagadda_AgileAutomate_tech`
+3. Send the submission email using `06_Final/email_draft.md` — **not sent**
 4. **After submitting:** revoke the ClickUp API token used during the build
 
-Optional tidy-up: remove the `__probe_delete_me` field from the Projects list and the leftover `to do` / `complete` statuses on Projects and Vendor Payments.
+*Optional tidy-up: remove the `__probe_delete_me` field from the Projects list and the leftover `to do` / `complete` statuses on Projects and Vendor Payments.*

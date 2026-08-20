@@ -68,3 +68,11 @@ Both reviewers were invited as **guests** to the ClickUp workspace and their gue
 Workspace: https://app.clickup.com/90161754416/
 
 There is no anonymous public link — reviewers authenticate with their own ClickUp accounts.
+
+## Links
+
+| Item | Link |
+|------|------|
+| GitHub repository | https://github.com/karthikjonnalagadda/AgileAutomate_tech |
+| ClickUp workspace | https://app.clickup.com/90161754416/ |
+| Google Doc | **NOT CREATED — manual creation required** |
