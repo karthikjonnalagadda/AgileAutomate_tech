@@ -20,7 +20,7 @@ Everything needed to submit, in one place.
 | n8n | Designed (theoretical, as the assignment requires) |
 | Submission document | Complete, no placeholders |
 | Evidence | 10 of 11 screenshots — `06_automation_config.png` outstanding |
-| Google Doc | **NOT CREATED** — manual step |
+| Google Doc | **CREATED** — link recorded below |
 | Email | **NOT SENT** — manual step |
 
 ## Verified numbers
@@ -39,11 +39,11 @@ Views                   Owner Cockpit · By Designer · Overdue · Payments Due
 
 ## Remaining steps
 
-1. Capture `06_automation_config.png` — ClickUp → Design Tasks → **Automate → Manage**
-2. Paste `final_document_content.md` into Google Docs
-3. Insert the screenshots at their marked positions (`*[Screenshot NN_name.png — …]*`)
-4. Name the doc `KarthikJonnalagadda_AgileAutomate_tech`
-5. Set **comment or edit access** for anyone with the link
+1. ~~Paste `final_document_content.md` into Google Docs~~ — **done**
+2. Capture `06_automation_config.png` — ClickUp → Design Tasks → **Automate → Manage** — and add it to the doc
+3. Confirm every screenshot sits at its marked position (`*[Screenshot NN_name.png — …]*`)
+4. Confirm the doc is named `KarthikJonnalagadda_AgileAutomate_tech`
+5. Confirm **comment or edit access** for anyone with the link (test in an incognito window)
 6. Send using `email_draft.md`
 7. After submitting, revoke the ClickUp API token used during the build
 
@@ -75,4 +75,4 @@ There is no anonymous public link — reviewers authenticate with their own Clic
 |------|------|
 | GitHub repository | https://github.com/karthikjonnalagadda/AgileAutomate_tech |
 | ClickUp workspace | https://app.clickup.com/90161754416/ |
-| Google Doc | **NOT CREATED — manual creation required** |
+| Google Doc (submission) | https://docs.google.com/document/d/13X4d1J55h8V-RsZwattpTGsrY-sqWSsTjsGBIqQFYeQ/edit?usp=sharing |

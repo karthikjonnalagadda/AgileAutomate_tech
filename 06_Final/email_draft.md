@@ -1,6 +1,6 @@
 # Submission Email — Draft
 
-**NOT SENT.** Send manually, only after the Google Doc exists and its link is in place.
+**NOT SENT.** The Google Doc link is in place — send this manually once the doc's sharing settings are confirmed.
 
 ---
 
@@ -14,7 +14,7 @@ Hi Amit,
 
 Please find my submission for the Technical Implementation Specialist (Intern) assignment below.
 
-**Submission document:** [PASTE GOOGLE DOC LINK — comment access enabled]
+**Submission document:** https://docs.google.com/document/d/13X4d1J55h8V-RsZwattpTGsrY-sqWSsTjsGBIqQFYeQ/edit?usp=sharing
 
 It covers all three tasks:
 
@@ -44,7 +44,7 @@ ai.data@invarianceai.io
 
 ## Pre-send checklist
 
-- [ ] Google Doc created and link pasted above
+- [x] Google Doc created and link pasted above
 - [ ] Doc named `KarthikJonnalagadda_AgileAutomate_tech`
 - [ ] Doc set to **comment or edit access** for anyone with the link
 - [ ] Screenshots inserted at their marked positions
